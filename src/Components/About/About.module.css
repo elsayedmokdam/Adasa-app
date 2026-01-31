@@ -1,0 +1,51 @@
+.before::before {
+    content: '';
+    position: absolute;
+    height: 40px;
+    width: 5px;
+    background-image: linear-gradient(to top, var(--color-primary), var(--color-accent));
+    top: 0px;
+    left: -15px;
+    background-color: red;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+.after::after {
+    content: '';
+    position: absolute;
+    height: 40px;
+    width: 5px;
+    background-image: linear-gradient(to top, var(--color-primary), var(--color-accent));
+    top: 0px;
+    right: -15px;
+    background-color: red;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.my_border_top {
+    border-top: 1px solid var(--color-border-light);
+}
+
+.bg_hover {
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+}
+
+.bg_hover:hover {
+    background-color: var(--color-orange-dark);
+    border: 1px solid var(--color-primary);
+}
+
+.bg_hover:hover h4 {
+    color: var(--color-primary) !important;
+}
