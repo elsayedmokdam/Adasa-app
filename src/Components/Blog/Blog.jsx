@@ -682,7 +682,7 @@ export default function Blog() {
               </div>
             </div>
           </div>
-          <div className="my-bg-dark p-5">
+          <div className="my-bg-dark">
             <div className="container">
               <div className="row align-items-center justify-content-between g-5">
                 <div className="col-xl-3">
@@ -697,7 +697,7 @@ export default function Blog() {
                   <div className="row g-3">
                     <div className="col-xl-2">
                       <button
-                        className="text-decoration-none text-white btn my-bg-primary w-100"
+                        className="text-decoration-none text-white btn my-bg-primary w-100 h-100"
                         onClick={() => setBlogs(posts)}
                       >
                         جميع المقالات
@@ -705,7 +705,7 @@ export default function Blog() {
                     </div>
                     <div className="col-xl-2">
                       <button
-                        className="text-decoration-none text-white btn my-bg-primary w-100"
+                        className="text-decoration-none text-white btn my-bg-primary w-100 h-100"
                         onClick={() => {
                           handlePosts("مناظر طبيعية");
                         }}
@@ -715,7 +715,7 @@ export default function Blog() {
                     </div>
                     <div className="col-xl-2">
                       <button
-                        className="text-decoration-none text-white btn my-bg-primary w-100"
+                        className="text-decoration-none text-white btn my-bg-primary w-100 h-100"
                         onClick={() => {
                           handlePosts("إضاءة");
                         }}
@@ -725,7 +725,7 @@ export default function Blog() {
                     </div>
                     <div className="col-xl-2">
                       <button
-                        className="text-decoration-none text-white btn my-bg-primary w-100"
+                        className="text-decoration-none text-white btn my-bg-primary w-100 h-100"
                         onClick={() => {
                           handlePosts("بورتريه");
                         }}
@@ -735,7 +735,7 @@ export default function Blog() {
                     </div>
                     <div className="col-xl-2">
                       <button
-                        className="text-decoration-none text-white btn my-bg-primary w-100"
+                        className="text-decoration-none text-white btn my-bg-primary w-100 h-100"
                         onClick={() => {
                           handlePosts("تقنيات");
                         }}
@@ -745,7 +745,7 @@ export default function Blog() {
                     </div>
                     <div className="col-xl-2">
                       <button
-                        className="text-decoration-none text-white btn my-bg-primary w-100"
+                        className="text-decoration-none text-white btn my-bg-primary w-100 h-100"
                         onClick={() => {
                           handlePosts("معدات");
                         }}
@@ -782,12 +782,12 @@ export default function Blog() {
                   </span>
                 </div>
               </div>
-              <div className="row g-4 my-5">
+              <div className="row g-4 py-5">
                 <Outlet />
                 {blogs.map((post) => (
                   <div
                     key={post.id}
-                    className={`col-md-${view === "grid" ? 4 : 12}`}
+                    className={`col-lg-${view === "grid" ? 4 : 12}`}
                   >
                     <Link
                       to={`/blog/details/${post.slug}`}

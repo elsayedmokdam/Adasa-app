@@ -49,3 +49,7 @@
 .bg_hover:hover h4 {
     color: var(--color-primary) !important;
 }
+
+:root {
+    overflow-x: hidden;
+}
