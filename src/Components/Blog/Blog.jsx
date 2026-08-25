@@ -1,16 +1,43 @@
 import classNames from "classnames";
-import { Link, Outlet, useLocation } from "react-router";
+import { Link, Outlet, useLocation, useSearchParams } from "react-router";
 import { useEffect, useState } from "react";
 import { posts } from "../../data/Posts";
 
-export default function Blog() {
+const buttons = [
+  "جميع المقالات",
+  "مناظر طبيعية",
+  "إضاءة",
+  "بورتريه",
+  "تقنيات",
+  "معدات",
+];
 
+export default function Blog() {
+  const { pathname } = useLocation();
+  const location = useLocation();
+  const isDetailsPage = location.pathname.includes("/blog/details");
   const [view, setView] = useState("grid");
   const [blogs, setBlogs] = useState(posts);
+  const [activeButton, setActiveButton] = useState(buttons[0]);
+
+  const [params] = useSearchParams();
+  const category = params.get("category");
+
+  useEffect(() => {
+    if (category) {
+      setBlogs(posts.filter((post) => post.category === category));
+    } else {
+      setBlogs(posts);
+    }
+  }, [category]);
 
   function handlePosts(value) {
-    setBlogs(posts.filter((post) => post.category === value));
-    console.log(value);
+    if (value == "جميع المقالات") {
+      setBlogs(posts);
+      setActiveButton(value);
+    }else {
+      setBlogs(posts.filter((post) => post.category === value));
+    }
   }
 
   function handleSearch(value) {
@@ -21,7 +48,6 @@ export default function Blog() {
     );
   }
 
-  const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -37,9 +63,6 @@ export default function Blog() {
       year: "numeric",
     });
   }
-
-  const location = useLocation();
-  const isDetailsPage = location.pathname.includes("/blog/details");
 
   return (
     <>
@@ -81,64 +104,27 @@ export default function Blog() {
                 </div>
                 <div className="col-xl-8">
                   <div className="row g-3">
-                    <div className="col-xl-2">
-                      <button
-                        className="text-decoration-none text-white btn my-bg-primary w-100 h-100"
-                        onClick={() => setBlogs(posts)}
-                      >
-                        جميع المقالات
-                      </button>
-                    </div>
-                    <div className="col-xl-2">
-                      <button
-                        className="text-decoration-none text-white btn my-bg-primary w-100 h-100"
-                        onClick={() => {
-                          handlePosts("مناظر طبيعية");
-                        }}
-                      >
-                        مناظر طبيعية
-                      </button>
-                    </div>
-                    <div className="col-xl-2">
-                      <button
-                        className="text-decoration-none text-white btn my-bg-primary w-100 h-100"
-                        onClick={() => {
-                          handlePosts("إضاءة");
-                        }}
-                      >
-                        إضاءة
-                      </button>
-                    </div>
-                    <div className="col-xl-2">
-                      <button
-                        className="text-decoration-none text-white btn my-bg-primary w-100 h-100"
-                        onClick={() => {
-                          handlePosts("بورتريه");
-                        }}
-                      >
-                        بورتريه
-                      </button>
-                    </div>
-                    <div className="col-xl-2">
-                      <button
-                        className="text-decoration-none text-white btn my-bg-primary w-100 h-100"
-                        onClick={() => {
-                          handlePosts("تقنيات");
-                        }}
-                      >
-                        تقنيات
-                      </button>
-                    </div>
-                    <div className="col-xl-2">
-                      <button
-                        className="text-decoration-none text-white btn my-bg-primary w-100 h-100"
-                        onClick={() => {
-                          handlePosts("معدات");
-                        }}
-                      >
-                        معدات
-                      </button>
-                    </div>
+                    {buttons.map((button, index) => (
+                      <div key={index} className="col-xl-2">
+                        <button
+                          className={`text-decoration-none text-white btn w-100 h-100 ${
+                            activeButton === button
+                              ? "bg-transparent border border-2 my-border-primary"
+                              : "my-bg-primary"
+                          }`}
+                          onClick={() => {
+                            setActiveButton(button);
+                            handlePosts(button);
+                          }}
+                          style={{
+                            borderRadius: "10px",
+                            fontSize: "14px",
+                          }}
+                        >
+                          {button}
+                        </button>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>

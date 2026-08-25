@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 import Layout from "./Components/Layout/Layout";
 import Home from "./Components/Home/Home";
 import Blog from "./Components/Blog/Blog";
@@ -11,14 +11,12 @@ const myRouter = createBrowserRouter([
     path: "",
     element: <Layout />,
     children: [
-      { index: true, path: "", element: <Home /> },
+      { index: true, element: <Navigate to="/home" /> },
       { path: "/home", element: <Home /> },
       {
         path: "/blog",
         element: <Blog />,
-        children: [
-          { path: "details/:slug", element: <ShowArticleDetails /> },
-        ],
+        children: [{ path: "details/:slug", element: <ShowArticleDetails /> }],
       },
       { path: "/about", element: <About /> },
       { path: "*", element: <NotFound /> },

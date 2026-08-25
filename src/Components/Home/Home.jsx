@@ -3,13 +3,19 @@ import HomeCSS from "./Home.module.css";
 import { Link, useLocation } from "react-router";
 import { useEffect } from "react";
 import { posts } from "../../data/Posts";
-
-const HomePosts = posts.slice(0, 3);
-
 import { Latest } from "../../data/Latest";
+
+const subjects = [
+  { subject: "إضاءة", num: 3 },
+  { subject: "بورتريه", num: 3 },
+  { subject: "تقنيات", num: 5 },
+  { subject: "معدات", num: 3 },
+  { subject: "مناظر طبيعية", num: 3 },
+];
 
 export default function Home() {
   const { pathname } = useLocation();
+  const HomePosts = posts.slice(0, 3);
 
   function convertDate(date) {
     return new Date(date).toLocaleDateString("ar-eg", {
@@ -207,66 +213,20 @@ export default function Home() {
                 اعثر على محتوى مصمم حسب اهتماماتك
               </p>
               <div className="row g-4 mt-5">
-                <div className="col-md-6 col-xl-3">
-                  <Link
-                    to=""
-                    className="inner my-bg-border rounded-5 text-border-light p-4 d-flex flex-column align-items-center gap-2 text-decoration-none"
-                  >
-                    <span className="my-bg-orange-dark my-text-primary rounded-4 text-border-primary p-3 w-fit">
-                      <i className="fa-solid fa-sun fa-xl"></i>
-                    </span>
-                    <p className="mb-0 mt-2 fw-bold text-white">إضاءة</p>
-                    <p className="mb-0 my-text-border-light">3 مقالة</p>
-                  </Link>
-                </div>
-                <div className="col-md-6 col-xl-3">
-                  <Link
-                    to=""
-                    className="inner my-bg-border rounded-5 text-border-light p-4 d-flex flex-column align-items-center gap-2 text-decoration-none"
-                  >
-                    <span className="my-bg-orange-dark my-text-primary rounded-4 text-border-primary p-3 w-fit">
-                      <i className="fa-solid fa-user fa-xl"></i>
-                    </span>
-                    <p className="mb-0 mt-2 fw-bold text-white">بورتريه</p>
-                    <p className="mb-0 my-text-border-light">3 مقالة</p>
-                  </Link>
-                </div>
-                <div className="col-md-6 col-xl-3">
-                  <Link
-                    to=""
-                    className="inner my-bg-border rounded-5 text-border-light p-4 d-flex flex-column align-items-center gap-2 text-decoration-none"
-                  >
-                    <span className="my-bg-orange-dark my-text-primary rounded-4 text-border-primary p-3 w-fit">
-                      <i className="fa-solid fa-mountain-sun fa-xl"></i>
-                    </span>
-                    <p className="mb-0 mt-2 fw-bold text-white">مناظر طبيعية</p>
-                    <p className="mb-0 my-text-border-light">2 مقالة</p>
-                  </Link>
-                </div>
-                <div className="col-md-6 col-xl-3">
-                  <Link
-                    to=""
-                    className="inner my-bg-border rounded-5 text-border-light p-4 d-flex flex-column align-items-center gap-2 text-decoration-none"
-                  >
-                    <span className="my-bg-orange-dark my-text-primary rounded-4 text-border-primary p-3 w-fit">
-                      <i className="fa-solid fa-sliders fa-xl"></i>
-                    </span>
-                    <p className="mb-0 mt-2 fw-bold text-white">تقنيات</p>
-                    <p className="mb-0 my-text-border-light">5 مقالة</p>
-                  </Link>
-                </div>
-                <div className="col-md-6 col-xl-3">
-                  <Link
-                    to=""
-                    className="inner my-bg-border rounded-5 text-border-light p-4 d-flex flex-column align-items-center gap-2 text-decoration-none"
-                  >
-                    <span className="my-bg-orange-dark my-text-primary rounded-4 text-border-primary p-3 w-fit">
-                      <i className="fa-solid fa-sun fa-xl"></i>
-                    </span>
-                    <p className="mb-0 mt-2 fw-bold text-white">معدات</p>
-                    <p className="mb-0 my-text-border-light">3 مقالة</p>
-                  </Link>
-                </div>
+                {subjects.map((subject, index) => (
+                  <div key={index} className="col-md-6 col-xl-3">
+                    <Link
+                      to={`/blog?category=${subject.subject}`}
+                      className="inner my-bg-border rounded-5 text-border-light p-4 d-flex flex-column align-items-center gap-2 text-decoration-none"
+                    >
+                      <span className="my-bg-orange-dark my-text-primary rounded-4 text-border-primary p-3 w-fit">
+                        <i className="fa-solid fa-sun fa-xl"></i>
+                      </span>
+                      <p className="mb-0 mt-2 fw-bold text-white">{subject.subject}</p>
+                      <p className="mb-0 my-text-border-light">{subject.num}مقالات</p>
+                    </Link>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
